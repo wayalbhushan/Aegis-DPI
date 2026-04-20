@@ -17,17 +17,17 @@ public:
     /**
      * @brief Extracts SNI from a TLS Client Hello packet.
      */
-    static std::optional<std::string> extract(const uint8_t* payload, size_t length) noexcept;
+    [[nodiscard]] static std::optional<std::string> extract(const uint8_t* payload, size_t length) noexcept;
     
     /**
      * @brief Confirms if payload is a probable TLS Client Hello.
      */
-    static bool isTLSClientHello(const uint8_t* payload, size_t length) noexcept;
+    [[nodiscard]] static bool isTLSClientHello(const uint8_t* payload, size_t length) noexcept;
     
     /**
      * @brief Extracts all extensions for logging/diagnostics.
      */
-    static std::vector<std::pair<uint16_t, std::string>> extractExtensions(
+    [[nodiscard]] static std::vector<std::pair<uint16_t, std::string>> extractExtensions(
         const uint8_t* payload, size_t length);
 
 private:

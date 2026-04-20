@@ -95,12 +95,12 @@ struct ParsedPacket {
  */
 class PacketParser {
 public:
-    static bool parse(const RawPacket& raw, ParsedPacket& parsed) noexcept;
+    [[nodiscard]] static bool parse(const RawPacket& raw, ParsedPacket& parsed) noexcept;
     
-    static std::string macToString(const uint8_t* mac);
-    static std::string ipToString(uint32_t ip);
-    static std::string protocolToString(uint8_t protocol);
-    static std::string tcpFlagsToString(uint8_t flags);
+    [[nodiscard]] static std::string macToString(const uint8_t* mac);
+    [[nodiscard]] static std::string ipToString(uint32_t ip);
+    [[nodiscard]] static std::string protocolToString(uint8_t protocol);
+    [[nodiscard]] static std::string tcpFlagsToString(uint8_t flags);
     
 private:
     static bool parseEthernet(const uint8_t* data, size_t len, ParsedPacket& parsed, size_t& offset) noexcept;
