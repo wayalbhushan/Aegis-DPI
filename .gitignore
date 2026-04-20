@@ -1,0 +1,16 @@
+# Build artifacts
+build/
+bin/
+*.exe
+*.o
+*.obj
+*.pdb
+*.ilk
+.vs/
+.vscode/
+
+# Test data and outputs
+*.pcap
+!test_dpi.pcap
+output.pcap
+test_dpi.pcap
