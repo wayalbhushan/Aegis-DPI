@@ -18,6 +18,8 @@ void printUsage(const char* prog) {
               << "  " << prog << " capture.pcap filtered.pcap --block-app YouTube --block-ip 192.168.1.50\n\n";
 }
 
+#include <chrono>
+
 int main(int argc, char* argv[]) {
     if (argc < 3) {
         printUsage(argv[0]);
@@ -46,10 +48,16 @@ int main(int argc, char* argv[]) {
     for (const auto& app : block_apps) engine.blockApp(app);
     for (const auto& dom : block_domains) engine.blockDomain(dom);
     
+    auto start_time = std::chrono::high_resolution_clock::now();
+    
     if (!engine.processFile(input, output)) {
         return 1;
     }
     
-    std::cout << "\nOutput successfully written to: " << output << "\n";
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+    
+    std::cout << "\n[Engine] High-Speed Ingestion Time: " << diff << "ms\n";
+    std::cout << "Output successfully written to: " << output << "\n";
     return 0;
 }
