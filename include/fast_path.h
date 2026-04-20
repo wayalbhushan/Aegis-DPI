@@ -39,9 +39,9 @@ public:
         uint64_t classification_hits;
     };
     
-    FPStats getStats() const;
-    int getId() const { return fp_id_; }
-    bool isRunning() const { return running_; }
+    [[nodiscard]] FPStats getStats() const;
+    [[nodiscard]] int getId() const { return fp_id_; }
+    [[nodiscard]] bool isRunning() const { return running_; }
 
 private:
     int fp_id_;
