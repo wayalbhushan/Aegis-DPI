@@ -65,14 +65,14 @@ public:
     bool loadRules(const std::string& filename);
     bool saveRules(const std::string& filename);
     
-    std::string generateReport() const;
-    std::string generateClassificationReport() const;
-    const DPIStats& getStats() const;
+    [[nodiscard]] std::string generateReport() const;
+    [[nodiscard]] std::string generateClassificationReport() const;
+    [[nodiscard]] const DPIStats& getStats() const;
     void printStatus() const;
     
-    RuleManager& getRuleManager() { return *rule_manager_; }
-    const Config& getConfig() const { return config_; }
-    bool isRunning() const { return running_; }
+    [[nodiscard]] RuleManager& getRuleManager() { return *rule_manager_; }
+    [[nodiscard]] const Config& getConfig() const { return config_; }
+    [[nodiscard]] bool isRunning() const { return running_; }
 
 private:
     Config config_;
