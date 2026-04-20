@@ -103,7 +103,8 @@ def create_tls_client_hello(sni):
     
     # Handshake header
     handshake = struct.pack('B', 0x01)  # Client Hello
-    handshake += struct.pack('>I', len(client_hello_body))[1:]  # 3-byte length
+    body_len = len(client_hello_body)
+    handshake += bytes([(body_len >> 16) & 0xFF, (body_len >> 8) & 0xFF, body_len & 0xFF])
     handshake += client_hello_body
     
     # TLS record header
@@ -119,7 +120,7 @@ def create_http_request(host, path='/'):
     return f"GET {path} HTTP/1.1\r\nHost: {host}\r\nUser-Agent: DPI-Test/1.0\r\nAccept: */*\r\n\r\n".encode()
 
 
-def create_dns_query(domain):
+def create_dns_query(domain: str) -> bytes:
     # Transaction ID
     txid = struct.pack('>H', random.randint(1, 65535))
     # Flags: standard query
